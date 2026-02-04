@@ -380,7 +380,7 @@ export default function Sidebar() {
                   className={cn(
                     "group relative flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-200",
                     active
-                      ? "bg-gradient-to-r from-attijari-orange to-attijari-red text-white shadow-lg shadow-attijari-orange/50"
+                      ? "bg-linear-to-r from-attijari-orange to-attijari-red text-white shadow-lg shadow-attijari-orange/50"
                       : "text-slate-400 dark:text-slate-500 hover:text-white hover:bg-slate-700/50 dark:hover:bg-slate-800/50",
                     isCollapsed && "justify-center"
                   )}
