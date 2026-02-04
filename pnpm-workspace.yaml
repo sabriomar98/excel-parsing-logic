@@ -1,0 +1,6 @@
+ignoredBuiltDependencies:
+  - '@prisma/engines'
+  - better-sqlite3
+  - esbuild
+  - prisma
+  - sharp
