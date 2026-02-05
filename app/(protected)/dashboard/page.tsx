@@ -61,8 +61,8 @@ export default function DashboardPage() {
     <PageContainer>
       {/* Premium Header */}
       <div className="mb-12">
-        <div className="space-y-2 mb-8">
-          <h1 className="text-5xl font-bold text-gray-900">
+        <div className="space-y-2 mb-8 ">
+          <h1 className="text-5xl font-bold text-gray-900 dark:text-white">
             Bienvenue, {user?.name || 'Utilisateur'}
           </h1>
           <p className="text-lg text-gray-600">

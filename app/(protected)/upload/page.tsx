@@ -155,7 +155,7 @@ export default function UploadPage() {
       </div>
 
       {/* Upload Area */}
-      <Card>
+      <Card className="p-12">
         <div
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}

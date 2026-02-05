@@ -161,7 +161,7 @@ export default function ImputationPage() {
                                         <div className="flex items-center justify-between">
                                             <div className="flex items-center gap-6 flex-1">
                                                 {/* Avatar */}
-                                                <div className="w-14 h-14 bg-linear-to-br from-attijari-orange to-attijari-red rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                                                <div className="w-14 h-14 bg-linear-to-br from-attijari-orange to-attijari-red rounded-full dark:bg-slate-600 bg-slate-100 flex items-center justify-center dark:text-white font-bold text-xl shadow-lg">
                                                     {collab.name.charAt(0).toUpperCase()}
                                                 </div>
 
