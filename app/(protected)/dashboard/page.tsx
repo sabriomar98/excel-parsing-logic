@@ -190,10 +190,10 @@ export default function DashboardPage() {
         {/* Sidebar Stats */}
         <div className="space-y-6">
           {/* Completion Rate Card */}
-          <div className="bg-linear-to-br from-attijari-orange to-attijari-red rounded-2xl shadow-lg p-8 text-white">
+          <div className="bg-linear-to-br from-attijari-orange to-attijari-red rounded-2xl shadow-lg p-8 dark:text-white">
             <div className="flex items-start justify-between mb-6">
               <div>
-                <p className="text-orange-100 text-sm font-semibold mb-2">TAUX DE COMPLÉTION</p>
+                <p className="dark:text-orange-100 text-sm font-semibold mb-2">TAUX DE COMPLÉTION</p>
                 <p className="text-5xl font-bold">{completionRate}%</p>
               </div>
               <TrendingUp className="h-8 w-8 text-orange-200" />
@@ -202,12 +202,12 @@ export default function DashboardPage() {
             {/* Progress Bar */}
             <div className="w-full h-2 bg-orange-300 dark:bg-orange-900/50 rounded-full overflow-hidden mb-4">
               <div
-                className="h-full bg-white rounded-full transition-all duration-500"
+                className="h-full  rounded-full transition-all duration-500"
                 style={{ width: `${completionRate}%` }}
               />
             </div>
 
-            <p className="text-orange-100 text-sm">
+            <p className="dark:text-orange-100 text-sm">
               {statusCounts.impute} sur {totalProjects} projets terminés
             </p>
           </div>
@@ -255,7 +255,7 @@ export default function DashboardPage() {
             title="Télécharger Fichier"
             description="Ajouter une nouvelle fiche d'instruction"
             href="/upload"
-            color="blue"
+            color="gray"
           />
           <ActionCard
             icon={Calendar}
@@ -331,10 +331,10 @@ function ActionCard({
   title: string;
   description: string;
   href: string;
-  color: 'blue' | 'green' | 'purple' | 'orange';
+  color: 'gray' | 'green' | 'purple' | 'orange';
 }) {
   const colorMap = {
-    blue: 'bg-attijari-orange',
+    gray: 'bg-gray-600',
     green: 'bg-green-600',
     purple: 'bg-purple-600',
     orange: 'bg-orange-600',

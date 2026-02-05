@@ -351,17 +351,17 @@ export default function ProjectDetailPage() {
               value={`${versionToDisplay.chargeTotale?.toFixed(1) || '0'} h`}
               icon={<TrendingUp className="h-6 w-6" />}
               color="blue"
-              subtext="Total working hours"
+              subtext="Durée totale de travail"
             />
             <AdvancedStat
-              label="Collaborators"
+              label="Collaborateurs"
               value={versionToDisplay.collaborators?.length || 0}
               icon={<Users className="h-6 w-6" />}
               color="green"
-              subtext="Team members"
+              subtext="Membres de l'équipe"
             />
             <AdvancedStat
-              label="Start Date"
+              label="Date de début"
               value={
                 versionToDisplay.dateDebut
                   ? new Date(versionToDisplay.dateDebut).toLocaleDateString('fr-FR')
@@ -369,10 +369,10 @@ export default function ProjectDetailPage() {
               }
               icon={<Calendar className="h-6 w-6" />}
               color="purple"
-              subtext="Project begins"
+              subtext="Début du projet"
             />
             <AdvancedStat
-              label="MEP Date"
+              label="Date de MEP"
               value={
                 versionToDisplay.dateMEP
                   ? new Date(versionToDisplay.dateMEP).toLocaleDateString('fr-FR')
@@ -383,7 +383,7 @@ export default function ProjectDetailPage() {
                 versionToDisplay.status === 'IMPUTE' ? 'green' :
                 versionToDisplay.status === 'PARTIEL' ? 'yellow' : 'red'
               }
-              subtext="Planned deployment"
+              subtext="Mise en production prévue"
             />
           </div>
         </div>
@@ -391,18 +391,18 @@ export default function ProjectDetailPage() {
 
       {/* Tabs Content - Premium */}
       <Tabs defaultValue="collaborators" className="space-y-8">
-        <div className="flex border-b border-gray-200">
+        <div className="flex border-b border-gray-200 dark:border-gray-700">
           <TabsList className="bg-transparent border-0">
             <TabsTrigger 
               value="collaborators" 
-              className="data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:bg-transparent rounded-none px-6 py-4 gap-2 font-semibold text-gray-700 data-[state=active]:text-blue-600 border-0"
+              className="data-[state=active]:border-b-2 data-[state=active]:border-blue-600 dark:data-[state=active]:border-blue-400 data-[state=active]:bg-transparent rounded-none px-6 py-4 gap-2 font-semibold text-gray-700 dark:text-gray-300 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 border-0"
             >
               <Users className="h-5 w-5" />
               Collaborateurs & Charges
             </TabsTrigger>
             <TabsTrigger 
               value="planning" 
-              className="data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:bg-transparent rounded-none px-6 py-4 gap-2 font-semibold text-gray-700 data-[state=active]:text-blue-600 border-0"
+              className="data-[state=active]:border-b-2 data-[state=active]:border-blue-600 dark:data-[state=active]:border-blue-400 data-[state=active]:bg-transparent rounded-none px-6 py-4 gap-2 font-semibold text-gray-700 dark:text-gray-300 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400 border-0"
             >
               <Clock className="h-5 w-5" />
               Planning
@@ -476,7 +476,7 @@ export default function ProjectDetailPage() {
                     <div className="flex items-start justify-between gap-6">
                       <div className="flex items-start gap-4 flex-1">
                         {/* Phase Number */}
-                        <div className="shrink-0 w-10 h-10 bg-attijari-orange text-white font-bold rounded-full flex items-center justify-center text-sm group-hover:shadow-lg transition-shadow">
+                        <div className="shrink-0 w-10 h-10 bg-attijari-orange dark:text-white font-bold rounded-full flex items-center justify-center text-sm group-hover:shadow-lg transition-shadow">
                           {idx + 1}
                         </div>
 
@@ -496,14 +496,14 @@ export default function ProjectDetailPage() {
                       {/* Dates */}
                       {plan.startDate && (
                         <div className="shrink-0 text-right">
-                          <div className="bg-orange-50 px-4 py-3 rounded-lg border border-orange-200">
+                          <div className="bg-orange-50 dark:bg-orange-900 px-4 py-3 rounded-lg border border-orange-200 dark:border-orange-600">
                             <p className="text-xs text-attijari-orange font-semibold mb-1">DÉBUT</p>
                             <p className="text-sm font-bold text-gray-900 dark:text-gray-100">
                               {new Date(plan.startDate).toLocaleDateString('fr-FR')}
                             </p>
                           </div>
                           {plan.endDate && (
-                            <div className="mt-3 text-xs text-gray-600">
+                            <div className="mt-3 text-xs dark:text-gray-300">
                               <p className="font-semibold mb-1">FIN</p>
                               <p>{new Date(plan.endDate).toLocaleDateString('fr-FR')}</p>
                             </div>
