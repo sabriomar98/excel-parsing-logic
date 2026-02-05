@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import * as jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET || '55e79cf0beb7f558a52f06ab9f9291b75b70aa738a5e51299c78641bc7407430';
 const SALT_ROUNDS = 10;
 
 export interface JWTPayload {
