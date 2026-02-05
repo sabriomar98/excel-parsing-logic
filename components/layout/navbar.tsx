@@ -6,13 +6,13 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { logout } from '@/lib/redux/authSlice';
-import { 
-  Menu, 
-  X, 
-  LogOut, 
-  Settings, 
-  BarChart3, 
-  Upload, 
+import {
+  Menu,
+  X,
+  LogOut,
+  Settings,
+  BarChart3,
+  Upload,
   FolderOpen,
   ChevronDown,
   User,
@@ -57,27 +57,27 @@ export function NavBar() {
   };
 
   const menuItems = [
-    { 
-      icon: FolderOpen, 
-      label: 'Projets', 
+    {
+      icon: FolderOpen,
+      label: 'Projets',
       href: '/projects',
       description: 'Voir tous les projets'
     },
-    { 
-      icon: Calendar, 
-      label: 'Imputations', 
+    {
+      icon: Calendar,
+      label: 'Imputations',
       href: '/imputation',
       description: 'Suivi des imputations quotidiennes'
     },
-    { 
-      icon: Upload, 
-      label: 'Télécharger', 
+    {
+      icon: Upload,
+      label: 'Télécharger',
       href: '/upload',
       description: 'Télécharger nouvelle instruction'
     },
-    { 
-      icon: BarChart3, 
-      label: 'Analytique', 
+    {
+      icon: BarChart3,
+      label: 'Analytique',
       href: '/analytics',
       description: 'Voir les analytiques'
     },
@@ -86,7 +86,7 @@ export function NavBar() {
   return (
     <>
       {/* Main Navbar */}
-      <nav 
+      <nav
         className="sticky top-0 z-40 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/60 dark:border-slate-700/60 shadow-sm transition-colors"
       >
         <div className="px-4 sm:px-6 lg:px-8">
@@ -131,7 +131,7 @@ export function NavBar() {
                   className="flex items-center gap-3 px-4 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group border border-transparent hover:border-slate-200 dark:hover:border-slate-700"
                 >
                   {/* Avatar */}
-                  <div className="w-10 h-10 rounded-full bg-linear-to-br from-attijari-orange to-attijari-red flex items-center justify-center text-white font-bold text-sm shadow-lg ring-2 ring-white dark:ring-slate-800">
+                  <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center dark:text-white font-bold text-sm shadow-lg">
                     {isLoading ? '?' : user?.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
 
@@ -157,7 +157,7 @@ export function NavBar() {
                     {/* User Info Section */}
                     <div className="relative px-6 py-5 bg-linear-to-br from-orange-50 to-orange-100/50 dark:from-orange-900/20 dark:to-orange-800/10 border-b border-orange-200 dark:border-orange-800/30">
                       <div className="flex items-start gap-4">
-                        <div className="w-14 h-14 rounded-xl bg-linear-to-br from-attijari-orange to-attijari-red flex items-center justify-center text-white font-bold text-xl shadow-lg ring-4 ring-white dark:ring-slate-700">
+                        <div className="w-14 h-14 rounded-xl bg-slate-200 dark:bg-slate-700 flex items-center justify-center dark:text-white font-bold text-xl shadow-lg ">
                           {user?.name?.charAt(0).toUpperCase() || 'U'}
                         </div>
                         <div className="flex-1 min-w-0">

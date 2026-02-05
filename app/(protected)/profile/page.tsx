@@ -137,7 +137,7 @@ export default function ProfilePage() {
                 {/* Profile Card */}
                 <Card className="lg:col-span-1 p-6">
                     <div className="flex flex-col items-center text-center">
-                        <div className="w-24 h-24 rounded-full bg-linear-to-br from-attijari-orange to-attijari-red flex items-center justify-center text-white font-bold text-3xl mb-4 shadow-lg">
+                        <div className="w-24 h-24 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center dark:text-white font-bold text-3xl mb-4 shadow-lg">
                             {user?.name.charAt(0).toUpperCase()}
                         </div>
                         <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
