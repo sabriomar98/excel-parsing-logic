@@ -1,6 +1,5 @@
 import * as XLSX from 'xlsx';
 import crypto from 'crypto';
-import fs from 'fs';
 
 export interface ExcelMetadata {
   filiale: string;

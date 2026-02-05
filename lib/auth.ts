@@ -20,7 +20,7 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
 }
 
 export function createJWT(payload: JWTPayload): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: '1d' });
 }
 
 export function verifyJWT(token: string): JWTPayload | null {
@@ -38,7 +38,7 @@ export async function setAuthCookie(token: string) {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    maxAge: 60 * 60 * 24 * 1, // 1 day
     path: '/',
   });
 }

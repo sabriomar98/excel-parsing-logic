@@ -28,7 +28,7 @@ interface CollaboratorData {
 const projectColumns: ColumnDef<ProjectData>[] = [
   {
     accessorKey: 'title',
-    header: 'Project',
+    header: 'Projet',
     cell: ({ row }) => <span className="font-medium">{row.getValue('title') || 'Untitled'}</span>,
   },
   {
@@ -45,7 +45,7 @@ const projectColumns: ColumnDef<ProjectData>[] = [
 const collaboratorColumns: ColumnDef<CollaboratorData>[] = [
   {
     accessorKey: 'name',
-    header: 'Collaborator',
+    header: 'Collaborateur',
     cell: ({ row }) => <span className="font-medium">{row.getValue('name')}</span>,
   },
   {
@@ -81,7 +81,7 @@ export default function AnalyticsPage() {
 
   return (
     <PageContainer>
-      <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">Analytics & Cumulation</h1>
+      <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-8">Analyse & Accumulation</h1>
 
       {/* Stats Summary */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -103,7 +103,7 @@ export default function AnalyticsPage() {
               <Users className="h-6 w-6 text-purple-600 dark:text-purple-400" />
             </div>
             <div>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Total Collaborators</p>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Total Collaborateurs</p>
               <p className="text-3xl font-bold text-gray-900 dark:text-gray-100">{byCollaborator.length}</p>
             </div>
           </div>
@@ -146,8 +146,8 @@ export default function AnalyticsPage() {
           columns={projectColumns}
           data={byProject}
           pageSize={10}
-          title="Projects Summary"
-          description="Detailed breakdown of total working hours per project"
+          title="Résumé des projets"
+          description="Détail complet du nombre total d’heures travaillées par projet"
         />
       </Card>
 
@@ -157,8 +157,8 @@ export default function AnalyticsPage() {
           columns={collaboratorColumns}
           data={byCollaborator.slice(0, 100)}
           pageSize={10}
-          title="Collaborators Summary"
-          description="Detailed breakdown of total working hours per collaborator"
+          title="Résumé des collaborateurs"
+          description="Détail complet du nombre total d’heures travaillées par collaborateur"
         />
       </Card>
     </PageContainer>
