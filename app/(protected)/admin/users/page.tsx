@@ -89,7 +89,7 @@ export default function UsersManagementPage() {
                     const user = row.original;
                     return (
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-linear-to-br from-attijari-orange to-attijari-red flex items-center justify-center text-white font-bold">
+                            <div className="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center dark:text-white font-bold">
                                 {user.name.charAt(0).toUpperCase()}
                             </div>
                             <span className="font-medium text-gray-900 dark:text-gray-100">{user.name}</span>

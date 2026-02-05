@@ -163,12 +163,12 @@ export function NavBar() {
                         <div className="flex-1 min-w-0">
                           <p className="font-bold text-slate-900 dark:text-slate-100 text-base truncate">{user?.name || 'Utilisateur'}</p>
                           <p className="text-sm text-slate-600 dark:text-slate-400 truncate mt-0.5">{user?.email || 'utilisateur@exemple.com'}</p>
-                          <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-slate-700 shadow-sm border border-orange-200 dark:border-orange-700">
+                          {/* <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-white dark:bg-slate-700 shadow-sm border border-orange-200 dark:border-orange-700">
                             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                             <span className="text-slate-700 dark:text-slate-300">
                               {user?.isImputer ? 'Administrateur Imputeur' : 'Utilisateur Standard'}
                             </span>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
                     </div>
