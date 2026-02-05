@@ -1,8 +1,30 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export function BodyWrapper({ children }: { children: React.ReactNode }) {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleSelectStart = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
+        e.preventDefault();
+      }
+    };
+
+    const wrapper = wrapperRef.current;
+    if (wrapper) {
+      wrapper.addEventListener('selectstart', handleSelectStart);
+    }
+
+    return () => {
+      if (wrapper) {
+        wrapper.removeEventListener('selectstart', handleSelectStart);
+      }
+    };
+  }, []);
+
   const handleCopy = (e: React.ClipboardEvent) => {
     e.preventDefault();
   };
@@ -19,20 +41,13 @@ export function BodyWrapper({ children }: { children: React.ReactNode }) {
     e.preventDefault();
   };
 
-  const handleSelectStart = (e: React.SyntheticEvent) => {
-    const target = e.target as HTMLElement;
-    if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA' && !target.isContentEditable) {
-      e.preventDefault();
-    }
-  };
-
   return (
     <div
+      ref={wrapperRef}
       onCopy={handleCopy}
       onCut={handleCut}
       onContextMenu={handleContextMenu}
       onDragStart={handleDragStart}
-      onSelectStart={handleSelectStart}
       className="contents"
     >
       {children}
