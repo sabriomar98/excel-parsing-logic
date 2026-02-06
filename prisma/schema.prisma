@@ -53,7 +53,7 @@ model InstructionVersion {
   versionNumber Int      @default(1)
   fileHash      String   @unique // SHA256 of file
   fileName      String   // Original file name
-  filePath      String   // Local storage path
+  filePath      String?  // Local storage path (optional)
 
   // Metadata from Excel
   demandeur     String?  // Demandeur Filiale

@@ -1,20 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs/promises';
-import path from 'path';
 import { getCurrentUser } from '@/lib/auth';
 import { parseExcelFile, generateDailyImputations } from '@/lib/excel-parser';
 import db from '@/lib/db';
-
-const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-
-// Ensure uploads directory exists
-async function ensureUploadDir() {
-  try {
-    await fs.access(uploadDir);
-  } catch {
-    await fs.mkdir(uploadDir, { recursive: true });
-  }
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,8 +13,6 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       );
     }
-
-    await ensureUploadDir();
 
     // Parse form data - get file from form
     const formData = await request.formData();
@@ -122,10 +107,8 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Save file to disk
+    // Generate a logical file name (no physical storage in Vercel)
     const fileName = `${project.id}-v${versionNumber}.xlsx`;
-    const finalFilePath = path.join(uploadDir, fileName);
-    await fs.writeFile(finalFilePath, fileBuffer);
 
     // Create version record
     const version = await db.instructionVersion.create({
@@ -134,7 +117,8 @@ export async function POST(request: NextRequest) {
         versionNumber,
         fileHash: parsed.fileHash,
         fileName,
-        filePath: `/uploads/${fileName}`,
+        // No physical file stored in serverless environment
+        filePath: '',
         demandeur: parsed.metadata.demandeur,
         chargeTotale: parsed.metadata.chargeTotale,
         dateDebut: parsed.metadata.dateDebut,
