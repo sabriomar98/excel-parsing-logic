@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  passwordHash String
+  role      String   @default("user") // "admin" or "user"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  uploadedVersions InstructionVersion[] @relation("uploadedBy")
+  projects         Project[]
+  collaborators    CollaboratorLine[]
+  dailyImputations DailyImputation[]
+}
+
+model Project {
+  id        String   @id @default(cuid())
+  filiale   String   // SCB, etc.
+  reference String   // Project reference
+  title     String?  // Descriptif du Besoin
+  context   String?  // Additional context
+
+  userId    String   // Owner of the project
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  versions InstructionVersion[]
+
+  @@unique([filiale, reference, userId])
+  @@index([filiale])
+  @@index([userId])
+}
+
+model InstructionVersion {
+  id            String   @id @default(cuid())
+  projectId     String
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  versionNumber Int      @default(1)
+  fileHash      String   @unique // SHA256 of file
+  fileName      String   // Original file name
+  filePath      String   // Local storage path
+
+  // Metadata from Excel
+  demandeur     String?  // Demandeur Filiale
+  chargeTotale  Float    // Total charge in JH
+  dateDebut     DateTime?
+  dateMEP       DateTime?
+  dateValidation DateTime?
+
+  // Status
+  status        String   @default("NON_IMPUTE") // NON_IMPUTE, PARTIEL, IMPUTE
+  imputedBy     String?  // User who marked as imputed
+
+  // Relations
+  collaborators CollaboratorLine[]
+  plannings     PlanningLine[]
+
+  uploadedBy    String
+  uploadedByUser User    @relation("uploadedBy", fields: [uploadedBy], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([projectId, versionNumber])
+  @@index([projectId])
+  @@index([fileHash])
+}
+
+model CollaboratorLine {
+  id        String   @id @default(cuid())
+  versionId String
+  version   InstructionVersion @relation(fields: [versionId], references: [id], onDelete: Cascade)
+
+  name      String   // Collaborator name
+  
+  userId    String   // Owner of the collaborator
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Charges by phase (in JH)
+  instruction         Float @default(0)
+  cadrage             Float @default(0)
+  conception          Float @default(0)
+  administration      Float @default(0)
+  technique           Float @default(0)
+  developpement       Float @default(0)
+  testUnitaire        Float @default(0)
+  testIntegration     Float @default(0)
+  assistanceRecette   Float @default(0)
+  deploiement         Float @default(0)
+  assistancePost      Float @default(0)
+
+  total               Float @default(0) // Sum of all charges
+  
+  isImputed           Boolean @default(false)
+  imputedAt           DateTime?
+
+  // Relations
+  dailyImputations    DailyImputation[]
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([versionId])
+  @@index([userId])
+}
+
+model DailyImputation {
+  id              String   @id @default(cuid())
+  collaboratorId  String
+  collaborator    CollaboratorLine @relation(fields: [collaboratorId], references: [id], onDelete: Cascade)
+  
+  userId          String   // Owner of the imputation
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  phase           String   // Phase name: instruction, cadrage, conception, etc.
+  dayNumber       Int      // Jour 1, 2, 3, etc. dans cette phase
+  datePrevu       DateTime? // Date prévue pour ce jour (optionnel)
+  
+  // Statut d'imputation pour ce jour
+  isImputed       Boolean  @default(false)
+  imputedAt       DateTime?
+  imputedBy       String?  // User ID qui a imputé
+  
+  // Commentaire optionnel pour ce jour
+  comment         String?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([collaboratorId])
+  @@index([phase])
+  @@index([userId])
+  @@unique([collaboratorId, phase, dayNumber])
+}
+
+model PlanningLine {
+  id        String   @id @default(cuid())
+  versionId String
+  version   InstructionVersion @relation(fields: [versionId], references: [id], onDelete: Cascade)
+
+  phase     String   // Phase name (Instruction, Cadrage, etc.)
+  startDate DateTime?
+  endDate   DateTime?
+  note      String?  // For "NA" or other notes
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([versionId])
+}
