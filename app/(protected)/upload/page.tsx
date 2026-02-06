@@ -186,48 +186,49 @@ export default function UploadPage() {
         </div>
       </Card>
 
-      {/* File Preview */}
+      {/* File Preview + Actions */}
       {preview && (
         <Card className="mt-6 p-6 bg-orange-50 dark:bg-orange-950/20 border-orange-200 dark:border-orange-800">
-          <div className="flex items-start gap-4">
-            <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-500 shrink-0 mt-1" />
-            <div className="flex-1">
-              <p className="font-semibold text-gray-900 dark:text-gray-100">Fichier Sélectionné</p>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{preview}</p>
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-4">
+              <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-500 shrink-0 mt-1" />
+              <div className="flex-1">
+                <p className="font-semibold text-gray-900 dark:text-gray-100">Fichier Sélectionné</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{preview}</p>
+              </div>
             </div>
+
+            {selectedFile && (
+              <div className="flex gap-3 justify-end">
+                <Button
+                  onClick={handleUpload}
+                  disabled={uploadMutation.isPending}
+                  className="bg-attijari-orange hover:bg-attijari-red min-w-[170px]"
+                >
+                  {uploadMutation.isPending ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Téléchargement...
+                    </>
+                  ) : (
+                    'Télécharger'
+                  )}
+                </Button>
+                <Button
+                  onClick={() => {
+                    setSelectedFile(null);
+                    setPreview(null);
+                    if (fileInputRef.current) fileInputRef.current.value = '';
+                  }}
+                  disabled={uploadMutation.isPending}
+                  variant="outline"
+                >
+                  Effacer
+                </Button>
+              </div>
+            )}
           </div>
         </Card>
-      )}
-
-      {/* Upload Button */}
-      {selectedFile && (
-        <div className="mt-8 flex gap-4">
-          <Button
-            onClick={handleUpload}
-            disabled={uploadMutation.isPending}
-            className="flex-1 bg-attijari-orange hover:bg-attijari-red"
-          >
-            {uploadMutation.isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Téléchargement...
-              </>
-            ) : (
-              'Télécharger le Fichier'
-            )}
-          </Button>
-          <Button
-            onClick={() => {
-              setSelectedFile(null);
-              setPreview(null);
-              if (fileInputRef.current) fileInputRef.current.value = '';
-            }}
-            disabled={uploadMutation.isPending}
-            variant="outline"
-          >
-            Effacer
-          </Button>
-        </div>
       )}
 
       {/* Instructions */}
