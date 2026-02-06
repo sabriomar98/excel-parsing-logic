@@ -203,7 +203,7 @@ export default function UploadPage() {
                 <Button
                   onClick={handleUpload}
                   disabled={uploadMutation.isPending}
-                  className="bg-attijari-orange hover:bg-attijari-red min-w-[170px]"
+                  className="bg-attijari-orange hover:bg-attijari-red min-w-42.5"
                 >
                   {uploadMutation.isPending ? (
                     <>
